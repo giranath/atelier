@@ -1,5 +1,6 @@
 add_executable(unit-tests
-        main.cpp)
+        main.cpp
+        scene_node.cpp)
 
 target_link_libraries(unit-tests
         PRIVATE runtime

@@ -18,7 +18,7 @@ class ATELIER_RUNTIME_EXPORT scene_node
     friend scene;
 
     // The scene where this node exist
-    scene* owning_scene_;
+    scene* owning_scene_ = nullptr;
 
     // Hierarchy related properties
     scene_node* parent_ = nullptr;
