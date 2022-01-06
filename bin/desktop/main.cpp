@@ -1,5 +1,16 @@
+#include "main_window_control_node.hpp"
+#include <atelier/scene_tree.hpp>
+
 #include <iostream>
 #include <SDL.h>
+
+/**
+ * Launch the main game loop
+ * @param argc The number of arguments
+ * @param argv The list of arguments
+ * @return the exit code of the program
+ */
+int launch_main_loop(int argc, char* argv[]);
 
 /**
  * Entry point of the launcher
@@ -15,25 +26,26 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    std::cout << "Hello world!" << std::endl;
-    SDL_Window* main_window = SDL_CreateWindow("Hello world", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
-
-    bool running = true;
-    while(running)
-    {
-        SDL_Event event;
-        while(SDL_PollEvent(&event))
-        {
-            if(event.type == SDL_QUIT)
-            {
-                running = false;
-            }
-        }
-    }
-
-    SDL_DestroyWindow(main_window);
+    const int result = launch_main_loop(argc, argv);
 
     SDL_Quit();
+
+    return result;
+}
+
+int launch_main_loop(int argc, char* argv[])
+{
+    // Here we construct the main scene hierarchy
+    at::main_window_control_node main_window;
+
+    // Here we setup the main scene tree
+    at::scene_tree tree;
+    tree.set_root(&main_window);
+
+    while(main_window.running())
+    {
+        tree.tick(at::frame_duration{});
+    }
 
     return 0;
 }
