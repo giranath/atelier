@@ -1,5 +1,5 @@
 #include "scene_node.hpp"
-#include "scene.hpp"
+#include "scene_tree.hpp"
 #include "scene_node_errors.hpp"
 
 namespace at
@@ -263,6 +263,16 @@ const scene_node* scene_node::root() const noexcept
     }
 }
 
+scene_tree* scene_node::scene() noexcept
+{
+    return owning_scene_;
+}
+
+const scene_tree* scene_node::scene() const noexcept
+{
+    return owning_scene_;
+}
+
 void scene_node::propagate_tick()
 {
     on_ticking();
@@ -275,7 +285,7 @@ void scene_node::propagate_tick()
     on_ticked();
 }
 
-void scene_node::propagate_enter_scene(scene* new_scene)
+void scene_node::propagate_enter_scene(scene_tree* new_scene)
 {
     on_entering_scene();
 

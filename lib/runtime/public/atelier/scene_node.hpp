@@ -8,17 +8,17 @@
 namespace at
 {
 
-class scene;
+class scene_tree;
 
 /**
  * Base class every nodes in a scene must implement
  */
 class ATELIER_RUNTIME_EXPORT scene_node
 {
-    friend scene;
+    friend scene_tree;
 
     // The scene where this node exist
-    scene* owning_scene_ = nullptr;
+    scene_tree* owning_scene_ = nullptr;
 
     // Hierarchy related properties
     scene_node* parent_ = nullptr;
@@ -162,6 +162,9 @@ public:
      */
     [[nodiscard]] const scene_node* root() const noexcept;
 
+    [[nodiscard]] scene_tree* scene() noexcept;
+    [[nodiscard]] const scene_tree* scene() const noexcept;
+
 private:
     /**
      * Propagate the tick event on all the nodes under this node
@@ -172,7 +175,7 @@ private:
      * Propagate the enter scene event on all nodes under this node
      * @param new_scene The new scene where this node is entering
      */
-    void propagate_enter_scene(scene* new_scene);
+    void propagate_enter_scene(scene_tree* new_scene);
 
     /**
      * Propagate the leave scene event on all nodes under this node

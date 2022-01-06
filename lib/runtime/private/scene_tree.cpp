@@ -1,16 +1,16 @@
-#include "scene.hpp"
+#include "scene_tree.hpp"
 #include "scene_node.hpp"
 
 namespace at
 {
 
-scene::scene()
+scene_tree::scene_tree()
 : root_{nullptr}
 {
 
 }
 
-scene::~scene()
+scene_tree::~scene_tree()
 {
     if(root_)
     {
@@ -18,12 +18,12 @@ scene::~scene()
     }
 }
 
-scene::scene(scene&& other) noexcept
+scene_tree::scene_tree(scene_tree&& other) noexcept
 : root_{std::exchange(other.root_, nullptr)}
 {
 }
 
-scene& scene::operator=(scene&& other) noexcept
+scene_tree& scene_tree::operator=(scene_tree&& other) noexcept
 {
     if(&other != this)
     {
@@ -33,7 +33,7 @@ scene& scene::operator=(scene&& other) noexcept
     return *this;
 }
 
-void scene::set_root(scene_node* new_root)
+void scene_tree::set_root(scene_node* new_root)
 {
     if(root_)
     {
@@ -48,27 +48,27 @@ void scene::set_root(scene_node* new_root)
     }
 }
 
-scene_node* scene::root() noexcept
+scene_node* scene_tree::root() noexcept
 {
     return root_;
 }
 
-const scene_node* scene::root() const noexcept
+const scene_node* scene_tree::root() const noexcept
 {
     return root_;
 }
 
-bool scene::empty() const noexcept
+bool scene_tree::empty() const noexcept
 {
-    return root_;
+    return root_ == nullptr;
 }
 
-void scene::clear()
+void scene_tree::clear()
 {
     set_root(nullptr);
 }
 
-void scene::tick()
+void scene_tree::tick()
 {
     if(root_)
     {

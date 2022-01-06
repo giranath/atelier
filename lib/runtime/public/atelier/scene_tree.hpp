@@ -1,5 +1,5 @@
-#ifndef ATELIER_RUNTIME_SCENE_HPP
-#define ATELIER_RUNTIME_SCENE_HPP
+#ifndef ATELIER_RUNTIME_SCENE_TREE_HPP
+#define ATELIER_RUNTIME_SCENE_TREE_HPP
 
 #include "runtime_export.hpp"
 
@@ -11,36 +11,36 @@ class scene_node;
 /**
  * Represents a hierarchy of active nodes
  */
-class ATELIER_RUNTIME_EXPORT scene
+class ATELIER_RUNTIME_EXPORT scene_tree
 {
     scene_node* root_;
 public:
     // Copy is disabled
-    scene(const scene&) = delete;
-    scene& operator=(const scene& other) = delete;
+    scene_tree(const scene_tree&) = delete;
+    scene_tree& operator=(const scene_tree& other) = delete;
 
     /**
      * Initializes an empty scene
      */
-    scene();
+    scene_tree();
 
     /**
      * Destroy a scene
      */
-    ~scene();
+    ~scene_tree();
 
     /**
      * Move a scene into this
      * @param other The other scene to move into this
      */
-    scene(scene&& other) noexcept;
+    scene_tree(scene_tree&& other) noexcept;
 
     /**
      * Move a scene into this
      * @param other The scene to move into this
      * @return a reference to this
      */
-    scene& operator=(scene&& other) noexcept;
+    scene_tree& operator=(scene_tree&& other) noexcept;
 
     /**
      * Change the root node of this scene
