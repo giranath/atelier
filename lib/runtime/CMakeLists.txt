@@ -5,6 +5,10 @@ add_library(runtime
     private/version.cpp
     )
 
+set_target_properties(runtime PROPERTIES
+        DEBUG_POSTFIX d
+        OUTPUT_NAME atelier-runtime)
+
 target_compile_features(runtime
     PUBLIC cxx_std_17)
 
