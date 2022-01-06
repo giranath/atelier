@@ -3,6 +3,7 @@
 
 #include "runtime_export.hpp"
 #include "frame_duration.hpp"
+#include "scene_node_sibling_iterator.hpp"
 #include <vector>
 #include <stdexcept>
 
@@ -29,6 +30,28 @@ class ATELIER_RUNTIME_EXPORT scene_node
     scene_node* last_child_ = nullptr;
 
 public:
+    class ATELIER_RUNTIME_EXPORT children_range
+    {
+        scene_node* first_;
+
+    public:
+        explicit inline children_range(scene_node* first) noexcept
+        : first_{first}
+        {
+
+        }
+
+        inline scene_node_sibling_iterator begin() noexcept
+        {
+            return scene_node_sibling_iterator{first_};
+        }
+
+        inline scene_node_sibling_iterator end() noexcept
+        {
+            return scene_node_sibling_iterator{};
+        }
+    };
+
     /**
      * Initializes an empty node
      */
@@ -174,6 +197,8 @@ public:
      * @return The scene owning this node
      */
     [[nodiscard]] const scene_tree* scene() const noexcept;
+
+    children_range children() noexcept;
 
 private:
     /**
