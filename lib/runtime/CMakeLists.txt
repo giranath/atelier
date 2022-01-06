@@ -9,6 +9,7 @@ add_library(runtime
     private/scene_tree.cpp
     public/atelier/scene_node_errors.hpp
     private/scene_node_errors.cpp
+    public/atelier/frame_duration.hpp
     )
 
 set_target_properties(runtime PROPERTIES

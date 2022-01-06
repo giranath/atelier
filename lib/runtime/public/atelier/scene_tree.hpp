@@ -2,6 +2,7 @@
 #define ATELIER_RUNTIME_SCENE_TREE_HPP
 
 #include "runtime_export.hpp"
+#include "frame_duration.hpp"
 
 namespace at
 {
@@ -74,8 +75,9 @@ public:
 
     /**
      * Tick the scene
+     * @param dt Elapsed time since previous tick
      */
-    void tick();
+    void tick(frame_duration dt);
 };
 
 }

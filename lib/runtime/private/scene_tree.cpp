@@ -68,11 +68,11 @@ void scene_tree::clear()
     set_root(nullptr);
 }
 
-void scene_tree::tick()
+void scene_tree::tick(frame_duration dt)
 {
     if(root_)
     {
-        root_->propagate_tick();
+        root_->propagate_tick(dt);
     }
 }
 

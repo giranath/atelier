@@ -273,16 +273,16 @@ const scene_tree* scene_node::scene() const noexcept
     return owning_scene_;
 }
 
-void scene_node::propagate_tick()
+void scene_node::propagate_tick(frame_duration dt)
 {
-    on_ticking();
+    on_ticking(dt);
 
     for(scene_node* child = first_child_; child; child = child->next_sibling_)
     {
-        child->propagate_tick();
+        child->propagate_tick(dt);
     }
 
-    on_ticked();
+    on_ticked(dt);
 }
 
 void scene_node::propagate_enter_scene(scene_tree* new_scene)
@@ -313,12 +313,12 @@ void scene_node::propagate_leave_scene()
     on_left_scene();
 }
 
-void scene_node::on_ticking()
+void scene_node::on_ticking(frame_duration)
 {
     // Intentionally a NO-OP
 }
 
-void scene_node::on_ticked()
+void scene_node::on_ticked(frame_duration)
 {
     // Intentionally a NO-OP
 }

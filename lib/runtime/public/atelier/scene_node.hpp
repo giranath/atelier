@@ -2,6 +2,7 @@
 #define ATELIER_RUNTIME_SCENE_NODE_HPP
 
 #include "runtime_export.hpp"
+#include "frame_duration.hpp"
 #include <vector>
 #include <stdexcept>
 
@@ -162,14 +163,24 @@ public:
      */
     [[nodiscard]] const scene_node* root() const noexcept;
 
+    /**
+     * Returns the scene owning this node
+     * @return The scene owning this node
+     */
     [[nodiscard]] scene_tree* scene() noexcept;
+
+    /**
+     * Returns the scene owning this node
+     * @return The scene owning this node
+     */
     [[nodiscard]] const scene_tree* scene() const noexcept;
 
 private:
     /**
      * Propagate the tick event on all the nodes under this node
+     * @param dt Elapsed time since previous tick
      */
-    void propagate_tick();
+    void propagate_tick(frame_duration dt);
 
     /**
      * Propagate the enter scene event on all nodes under this node
@@ -185,15 +196,17 @@ private:
 protected:
     /**
      * Called when this node is ticking
+     * @param dt Elapsed time since previous tick
      * @note At this point, children have not started ticking
      */
-    virtual void on_ticking();
+    virtual void on_ticking(frame_duration dt);
 
     /**
      * Called when this node is ticking
+     * @param dt Elapsed time since previous tick
      * @note At this point, children have finished ticking
      */
-    virtual void on_ticked();
+    virtual void on_ticked(frame_duration dt);
 
     /**
      * Called after this node has attached itself to a new parent
