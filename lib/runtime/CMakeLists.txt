@@ -1,17 +1,19 @@
 include(GenerateExportHeader)
 
 add_library(runtime
-    public/atelier/version.hpp
-    private/version.cpp
-    public/atelier/scene_node.hpp
-    private/scene_node.cpp
-    public/atelier/scene_tree.hpp
-    private/scene_tree.cpp
-    public/atelier/scene_node_errors.hpp
-    private/scene_node_errors.cpp
-    public/atelier/frame_duration.hpp
+        public/atelier/version.hpp
+        private/version.cpp
+        public/atelier/scene_node.hpp
+        private/scene_node.cpp
+        public/atelier/scene_tree.hpp
+        private/scene_tree.cpp
+        public/atelier/scene_node_errors.hpp
+        private/scene_node_errors.cpp
+        public/atelier/frame_duration.hpp
         public/atelier/scene_node_sibling_iterator.hpp
         private/scene_node_sibling_iterator.cpp
+        public/atelier/control_node.hpp
+        private/control_node.cpp
     )
 
 set_target_properties(runtime PROPERTIES
