@@ -1,4 +1,6 @@
 #include "scene_node.hpp"
+#include "scene.hpp"
+#include "scene_node_errors.hpp"
 
 namespace at
 {
@@ -88,6 +90,45 @@ void scene_node::attach_after(scene_node& sibling)
     if(parent_->owning_scene_)
     {
         propagate_enter_scene(parent_->owning_scene_);
+    }
+}
+
+bool scene_node::try_attach_to(scene_node& parent)
+{
+    try
+    {
+        attach_to(parent);
+        return true;
+    }
+    catch(const scene_node_error&)
+    {
+        return false;
+    }
+}
+
+bool scene_node::try_attach_before(scene_node& sibling)
+{
+    try
+    {
+        attach_before(sibling);
+        return true;
+    }
+    catch(const scene_node_error&)
+    {
+        return false;
+    }
+}
+
+bool scene_node::try_attach_after(scene_node& sibling)
+{
+    try
+    {
+        attach_after(sibling);
+        return true;
+    }
+    catch(const scene_node_error&)
+    {
+        return false;
     }
 }
 
@@ -190,6 +231,38 @@ const scene_node* scene_node::previous_sibling() const noexcept
     return previous_sibling_;
 }
 
+scene_node* scene_node::root() noexcept
+{
+    if(owning_scene_)
+    {
+        return owning_scene_->root();
+    }
+    else if(parent_)
+    {
+        return parent_->root();
+    }
+    else
+    {
+        return this;
+    }
+}
+
+const scene_node* scene_node::root() const noexcept
+{
+    if(owning_scene_)
+    {
+        return owning_scene_->root();
+    }
+    else if(parent_)
+    {
+        return parent_->root();
+    }
+    else
+    {
+        return this;
+    }
+}
+
 void scene_node::propagate_tick()
 {
     on_ticking();
@@ -273,17 +346,6 @@ void scene_node::on_leaving_scene()
 void scene_node::on_left_scene()
 {
     // Intentionally a NO-OP
-}
-
-scene_node_already_attached_error::scene_node_already_attached_error(scene_node* node) noexcept
-: node_{node}
-{
-
-}
-
-const char* scene_node_already_attached_error::what() const noexcept
-{
-    return "node already attached";
 }
 
 }

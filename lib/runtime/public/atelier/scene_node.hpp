@@ -1,5 +1,5 @@
-#ifndef ATELIER_SCENE_NODE_HPP
-#define ATELIER_SCENE_NODE_HPP
+#ifndef ATELIER_RUNTIME_SCENE_NODE_HPP
+#define ATELIER_RUNTIME_SCENE_NODE_HPP
 
 #include "runtime_export.hpp"
 #include <vector>
@@ -15,6 +15,8 @@ class scene;
  */
 class ATELIER_RUNTIME_EXPORT scene_node
 {
+    friend scene;
+
     // The scene where this node exist
     scene* owning_scene_;
 
@@ -48,6 +50,27 @@ public:
      * @param sibling The node that will be the previous sibling
      */
     void attach_after(scene_node& sibling);
+
+    /**
+     * Attach this node to a parent
+     * @param parent The parent node to attach to
+     * @return true when the node is correctly attached or false if the node could not be attached
+     */
+    bool try_attach_to(scene_node& parent);
+
+    /**
+     * Attach this node as the previous sibling of a node
+     * @param sibling The node that will be the next sibling
+     * @return true when the node is correctly attached or false if the node could not be attached
+     */
+    bool try_attach_before(scene_node& sibling);
+
+    /**
+     * Attach this node as the next sibling of a node
+     * @param sibling The node that will be the previous sibling
+     * @return true when the node is correctly attached or false if the node could not be attached
+     */
+    bool try_attach_after(scene_node& sibling);
 
     /**
      * Detach this node from its parent
@@ -127,6 +150,18 @@ public:
      */
     [[nodiscard]] const scene_node* previous_sibling() const noexcept;
 
+    /**
+     * Returns the root node of the hierarchy this node is in
+     * @return The root node of this node hierarchy
+     */
+    [[nodiscard]] scene_node* root() noexcept;
+
+    /**
+     * Returns the root node of the hierarchy this node is in
+     * @return The root node of this node hierarchy
+     */
+    [[nodiscard]] const scene_node* root() const noexcept;
+
 private:
     /**
      * Propagate the tick event on all the nodes under this node
@@ -197,19 +232,6 @@ protected:
      * @note At this point, the node and all its children are no longer inside the scene
      */
     virtual void on_left_scene();
-};
-
-/**
- * Exception thrown when trying to attach a node that is already attached
- */
-class ATELIER_RUNTIME_EXPORT scene_node_already_attached_error final: public std::exception
-{
-    scene_node* node_;
-
-public:
-    explicit scene_node_already_attached_error(scene_node* node) noexcept;
-
-    const char* what() const noexcept final;
 };
 
 }

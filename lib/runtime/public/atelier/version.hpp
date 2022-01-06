@@ -1,5 +1,5 @@
-#ifndef DEF_ATELIER_VERSION_HPP
-#define DEF_ATELIER_VERSION_HPP
+#ifndef ATELIER_RUNTIME_VERSION_HPP
+#define ATELIER_RUNTIME_VERSION_HPP
 
 #include "runtime_export.hpp"
 

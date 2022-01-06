@@ -5,6 +5,10 @@ add_library(runtime
     private/version.cpp
     public/atelier/scene_node.hpp
     private/scene_node.cpp
+    public/atelier/scene.hpp
+    private/scene.cpp
+        public/atelier/scene_node_errors.hpp
+        private/scene_node_errors.cpp
     )
 
 set_target_properties(runtime PROPERTIES
