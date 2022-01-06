@@ -3,6 +3,8 @@ include(GenerateExportHeader)
 add_library(runtime
     public/atelier/version.hpp
     private/version.cpp
+    public/atelier/scene_node.hpp
+    private/scene_node.cpp
     )
 
 set_target_properties(runtime PROPERTIES
