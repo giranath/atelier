@@ -21,6 +21,8 @@ void desktop_application::on_terminated()
 
 std::unique_ptr<at::gpu_device> desktop_application::make_gpu_device()
 {
+    // NOTE: Here we must create the main window with its OpenGL context to be able to create the gpu device for this application
+
     // Make sure we create an OpenGL 4.5 core profile
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
@@ -52,4 +54,21 @@ std::unique_ptr<at::gpu_device> desktop_application::make_gpu_device()
     // TODO: Create OpenGL 4.5 core gpu device
 
     return nullptr;
+}
+
+void desktop_application::setup_scene_root(at::scene_tree& scene)
+{
+    // TODO: Expose the main window to the rest of the game
+}
+
+void desktop_application::pump_host_events()
+{
+    SDL_Event event;
+    while(SDL_PollEvent(&event))
+    {
+        if(event.type == SDL_QUIT)
+        {
+            request_termination();
+        }
+    }
 }

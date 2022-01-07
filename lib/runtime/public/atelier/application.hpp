@@ -43,6 +43,8 @@ public:
     application(application&& other) noexcept;
     application& operator=(application&& other) noexcept;
 
+    void request_termination();
+
 protected:
     virtual void on_initializing();
     virtual void on_initialized();
@@ -58,6 +60,12 @@ protected:
      * @note This function is guaranteed to be called a single time
      */
     virtual std::unique_ptr<gpu_device> make_gpu_device() = 0;
+
+    /**
+     * Change the root of the main scene
+     * @param scene The scene to update
+     */
+    virtual void setup_scene_root(scene_tree& scene);
 
 private:
     void initialize();

@@ -14,6 +14,8 @@ protected:
     void on_initializing() override final;
     void on_terminated() override final;
     std::unique_ptr<at::gpu_device> make_gpu_device() override final;
+    void setup_scene_root(at::scene_tree& scene) override final;
+    void pump_host_events() override final;
 };
 
 

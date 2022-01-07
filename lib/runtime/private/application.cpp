@@ -21,6 +21,13 @@ application::~application()
 application::application(application&& other) noexcept = default;
 application& application::operator=(application&& other) noexcept = default;
 
+void application::request_termination()
+{
+    assert(current_state_ == states::executing);
+
+    current_state_ = states::terminating;
+}
+
 void application::on_initializing()
 {
     // NO-OP
@@ -46,6 +53,11 @@ void application::pump_host_events()
     // NO-OP
 }
 
+void application::setup_scene_root(scene_tree& scene)
+{
+    // NO-OP
+}
+
 void application::initialize()
 {
     assert(current_state_ == states::uninitialized);
@@ -58,6 +70,10 @@ void application::initialize()
     gpu_ = make_gpu_device();
 
     on_initialized();
+
+    // Now that everything has been initialized
+    // The scene root can be updated with its startup content
+    setup_scene_root(scene_);
 
     current_state_ = states::executing;
 }
