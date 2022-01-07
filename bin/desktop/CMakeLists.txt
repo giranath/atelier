@@ -1,7 +1,9 @@
 add_executable(desktop_launcher
         main.cpp
         controls/main_window_control_node.cpp
-        controls/main_window_control_node.hpp)
+        controls/main_window_control_node.hpp
+        desktop_application.cpp
+        desktop_application.hpp)
 
 target_link_libraries(desktop_launcher
         PRIVATE runtime
