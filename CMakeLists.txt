@@ -11,7 +11,7 @@ add_subdirectory(bin)
 
 include(CMakePackageConfigHelpers)
 
-install(TARGETS runtime desktop_launcher EXPORT AtelierTargets
+install(TARGETS runtime desktop_launcher glad EXPORT AtelierTargets
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib
         RUNTIME DESTINATION bin

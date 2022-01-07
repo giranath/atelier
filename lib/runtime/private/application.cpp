@@ -25,6 +25,7 @@ void application::request_termination()
 {
     assert(current_state_ == states::executing);
 
+    // TODO: Here we can block termination if it is not a good moment
     current_state_ = states::terminating;
 }
 

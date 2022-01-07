@@ -3,19 +3,16 @@ add_executable(desktop_launcher
         controls/main_window_control_node.cpp
         controls/main_window_control_node.hpp
         desktop_application.cpp
-        desktop_application.hpp
-        glad/src/glad.c)
+        desktop_application.hpp)
 
 target_link_libraries(desktop_launcher
         PRIVATE runtime
         PRIVATE SDL2::SDL2
-        PRIVATE SDL2::main)
+        PRIVATE SDL2::main
+        PRIVATE glad::glad)
 
 set_target_properties(desktop_launcher PROPERTIES
         OUTPUT_NAME AtelierGame)
-
-target_include_directories(desktop_launcher
-        PRIVATE glad/include)
 
 # Make sure SDL.DLL is copied alongside game executable
 if(WIN32)
