@@ -28,7 +28,7 @@ protected:
     std::unique_ptr<gpu_device> make_gpu_device() override final;
     void setup_scene_root(scene_tree& scene) override final;
     void pump_host_events() override final;
-    void present_frame_to_player();
+    void present_frame_to_player() override final;
 };
 
 }

@@ -3,6 +3,14 @@ include(GenerateExportHeader)
 add_library(gpu_opengl45
         private/opengl45_gpu_device.cpp
         public/atelier/gpu/opengl45_gpu_device.hpp
+        private/opengl45_gpu_pipeline_state.cpp
+        private/opengl45_gpu_pipeline_state.hpp
+        private/opengl45_gpu_buffer.hpp
+        private/opengl45_gpu_buffer.cpp
+        private/opengl45_gpu_texture.hpp
+        private/opengl45_gpu_texture.cpp
+        private/opengl45_helpers.hpp
+        private/opengl45_helpers.cpp
         )
 
 set_target_properties(gpu_opengl45 PROPERTIES
@@ -28,4 +36,5 @@ target_include_directories(gpu_opengl45
         )
 
 target_link_libraries(gpu_opengl45
-        PUBLIC runtime)
+        PUBLIC runtime
+        PRIVATE glad::glad)

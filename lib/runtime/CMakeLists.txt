@@ -17,7 +17,13 @@ add_library(runtime
         public/atelier/application.hpp
         private/application.cpp
         public/atelier/gpu_device.hpp
-    )
+        public/atelier/gpu_pipeline_state.hpp
+        public/atelier/gpu_vertex_layout.hpp
+        private/gpu_vertex_layout.cpp
+        public/atelier/gpu_buffer.hpp
+        public/atelier/gpu_texture.hpp
+        private/gpu_texture.cpp
+        )
 
 set_target_properties(runtime PROPERTIES
         DEBUG_POSTFIX d
