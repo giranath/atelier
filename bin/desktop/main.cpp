@@ -13,6 +13,6 @@ int main(int argc, char* argv[])
 {
     return at::launch_application(argc, argv, []() -> std::unique_ptr<at::application>
     {
-        return std::make_unique<desktop_application>();
+        return std::make_unique<at::desktop_application>();
     });
 }

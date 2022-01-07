@@ -5,6 +5,9 @@ add_executable(desktop_launcher
         desktop_application.cpp
         desktop_application.hpp)
 
+target_include_directories(desktop_launcher
+        PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
 target_link_libraries(desktop_launcher
         PRIVATE runtime
         PRIVATE gpu_opengl45

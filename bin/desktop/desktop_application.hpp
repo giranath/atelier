@@ -6,17 +6,30 @@
 
 #include <SDL.h>
 
+#include <memory>
+
+namespace at
+{
+
+class main_window_control_node;
+
 class desktop_application final : public at::application
 {
-    SDL_Window* main_window_;
-    SDL_GLContext opengl_context_;
+    std::unique_ptr<main_window_control_node> main_control_node_ = nullptr;
+    SDL_Window* main_window_ = nullptr;
+    SDL_GLContext opengl_context_ = nullptr;
+
+public:
+    desktop_application() = default;
+
 protected:
     void on_initializing() override final;
     void on_terminated() override final;
-    std::unique_ptr<at::gpu_device> make_gpu_device() override final;
-    void setup_scene_root(at::scene_tree& scene) override final;
+    std::unique_ptr<gpu_device> make_gpu_device() override final;
+    void setup_scene_root(scene_tree& scene) override final;
     void pump_host_events() override final;
 };
 
+}
 
 #endif
