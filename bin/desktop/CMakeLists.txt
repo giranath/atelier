@@ -1,9 +1,7 @@
-find_package(SDL2 REQUIRED CONFIG)
-
 add_executable(desktop_launcher
         main.cpp
-        main_window_control_node.hpp
-        main_window_control_node.cpp)
+        controls/main_window_control_node.cpp
+        controls/main_window_control_node.hpp)
 
 target_link_libraries(desktop_launcher
         PRIVATE runtime

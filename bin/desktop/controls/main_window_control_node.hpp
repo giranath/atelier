@@ -22,23 +22,24 @@ public:
      * Returns a reference to the OpenGL context managed by this window
      * @return the OpenGL context managed by this window
      */
-    SDL_GLContext& opengl_context() noexcept;
+    [[nodiscard]] SDL_GLContext& opengl_context() noexcept;
 
     /**
      * Returns a reference to the window managed by this node
      * @return the window managed by this node
      */
-    SDL_Window* window() noexcept;
+    [[nodiscard]] SDL_Window* window() noexcept;
 
+    /**
+     * Check if the main window control node is still running
+     * @return true when the main window is still running
+     * TODO: The application lifecycle should be moved elsewhere
+     */
     [[nodiscard]] bool running() const;
 
 protected:
     virtual void on_ticking(frame_duration dt) override final;
-
-    // Create the window and OpenGL context
     virtual void on_entering_scene() override final;
-
-    // Destroy the window and OpenGL context
     virtual void on_left_scene() override final;
 };
 

@@ -14,6 +14,9 @@ add_library(runtime
         private/scene_node_sibling_iterator.cpp
         public/atelier/control_node.hpp
         private/control_node.cpp
+        public/atelier/application.hpp
+        private/application.cpp
+        public/atelier/gpu_device.hpp
     )
 
 set_target_properties(runtime PROPERTIES
@@ -40,4 +43,3 @@ target_include_directories(runtime
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/exports/public/atelier>
     PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/exports/private>
     )
-
