@@ -1,5 +1,7 @@
 #include "desktop_application.hpp"
 #include "glad/glad.h"
+
+#include <atelier/gpu/opengl45_gpu_device.hpp>
 #include <iostream>
 
 void desktop_application::on_initializing()
@@ -51,9 +53,7 @@ std::unique_ptr<at::gpu_device> desktop_application::make_gpu_device()
         throw std::runtime_error{"failed to load OpenGL functions"};
     }
 
-    // TODO: Create OpenGL 4.5 core gpu device
-
-    return nullptr;
+    return std::make_unique<at::opengl45_gpu_device>();
 }
 
 void desktop_application::setup_scene_root(at::scene_tree& scene)

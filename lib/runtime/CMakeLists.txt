@@ -43,6 +43,3 @@ target_include_directories(runtime
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/exports/public/atelier>
     PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/exports/private>
     )
-
-target_link_libraries(runtime
-        INTERFACE glad::glad)

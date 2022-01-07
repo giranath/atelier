@@ -7,6 +7,7 @@ add_executable(desktop_launcher
 
 target_link_libraries(desktop_launcher
         PRIVATE runtime
+        PRIVATE gpu_opengl45
         PRIVATE SDL2::SDL2
         PRIVATE SDL2::main
         PRIVATE glad::glad)
