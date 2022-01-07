@@ -43,7 +43,7 @@ public:
     friend int launch_application(int argc, char* argv[], application_factory factory);
 
     application();
-    ~application();
+    virtual ~application();
 
     application(application&& other) noexcept;
     application& operator=(application&& other) noexcept;

@@ -12,8 +12,9 @@ target_link_libraries(desktop_launcher
         PRIVATE runtime
         PRIVATE gpu_opengl45
         PRIVATE SDL2::SDL2
-        PRIVATE SDL2::main
-        PRIVATE glad::glad)
+        PRIVATE SDL2::SDL2main
+        PRIVATE glad::glad
+        PRIVATE ${CMAKE_DL_LIBS})
 
 set_target_properties(desktop_launcher PROPERTIES
         OUTPUT_NAME AtelierGame)

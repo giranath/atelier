@@ -1,5 +1,6 @@
 #include "scene_tree.hpp"
 #include "scene_node.hpp"
+#include <utility>
 
 namespace at
 {

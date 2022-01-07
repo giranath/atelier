@@ -144,6 +144,8 @@ void application::terminate()
 
     // Termination code should go here
 
+    scene_.clear();
+
     on_terminated();
 
     current_state_ = states::terminated;
