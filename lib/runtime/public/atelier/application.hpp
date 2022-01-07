@@ -51,12 +51,33 @@ public:
     void request_termination();
 
 protected:
+    /**
+     * Called before the core application starts to initialize
+     * @note At this point no systems have been started yet
+     */
     virtual void on_initializing();
+
+    /**
+     * Called after the core application finished initializing
+     * @note At this point every core systems are ready to be used
+     */
     virtual void on_initialized();
 
+    /**
+     * Called before the core application starts to terminate
+     * @note At this point every systems are still functioning
+     */
     virtual void on_terminating();
+
+    /**
+     * Called when the core application has finished terminating
+     * @note At this point every core systems have been terminated
+     */
     virtual void on_terminated();
 
+    /**
+     * Pump events from the host operating system
+     */
     virtual void pump_host_events();
 
     /**
@@ -65,17 +86,17 @@ protected:
     virtual void present_frame_to_player();
 
     /**
+     * Change the root of the main scene
+     * @param scene The scene to update
+     */
+    virtual void setup_scene_root(scene_tree& scene);
+
+    /**
      * Make an instance of the GPU device compatible with this application
      * @return The GPU device to create from this application
      * @note This function is guaranteed to be called a single time
      */
     virtual std::unique_ptr<gpu_device> make_gpu_device() = 0;
-
-    /**
-     * Change the root of the main scene
-     * @param scene The scene to update
-     */
-    virtual void setup_scene_root(scene_tree& scene);
 
 private:
     void initialize();
@@ -85,7 +106,6 @@ private:
     void render();
     void terminate();
 };
-
 
 /**
  * Launch the application
