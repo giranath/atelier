@@ -3,7 +3,9 @@
 
 #include "runtime_export.hpp"
 #include "scene_tree.hpp"
+#include "frame_duration.hpp"
 #include <memory>
+#include <chrono>
 
 namespace at
 {
@@ -34,6 +36,9 @@ private:
     std::unique_ptr<gpu_device> gpu_;
     scene_tree scene_;
     states current_state_;
+    std::chrono::steady_clock::time_point last_frame_tp_;
+    frame_duration render_accumulated_duration_;
+
 public:
     friend int launch_application(int argc, char* argv[], application_factory factory);
 
@@ -55,6 +60,11 @@ protected:
     virtual void pump_host_events();
 
     /**
+     * Present the current frame to the player
+     */
+    virtual void present_frame_to_player();
+
+    /**
      * Make an instance of the GPU device compatible with this application
      * @return The GPU device to create from this application
      * @note This function is guaranteed to be called a single time
@@ -71,6 +81,8 @@ private:
     void initialize();
     int wait();
     void process_next_frame();
+    void tick(frame_duration dt);
+    void render();
     void terminate();
 };
 

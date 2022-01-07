@@ -81,4 +81,10 @@ void desktop_application::pump_host_events()
     }
 }
 
+void desktop_application::present_frame_to_player()
+{
+    // Present the current swapchain
+    SDL_GL_SwapWindow(main_window_);
+}
+
 }

@@ -9,6 +9,8 @@ application::application()
 : gpu_{}
 , scene_()
 , current_state_{states::uninitialized}
+, last_frame_tp_()
+, render_accumulated_duration_()
 {
 
 }
@@ -54,6 +56,11 @@ void application::pump_host_events()
     // NO-OP
 }
 
+void application::present_frame_to_player()
+{
+    // NO-OP
+}
+
 void application::setup_scene_root(scene_tree& scene)
 {
     // NO-OP
@@ -76,6 +83,8 @@ void application::initialize()
     // The scene root can be updated with its startup content
     setup_scene_root(scene_);
 
+    last_frame_tp_ = std::chrono::steady_clock::now();
+
     current_state_ = states::executing;
 }
 
@@ -93,9 +102,38 @@ int application::wait()
 
 void application::process_next_frame()
 {
+    const auto current_frame_tp = std::chrono::steady_clock::now();
+    const frame_duration previous_frame_duration = current_frame_tp - last_frame_tp_;
+
+    render_accumulated_duration_ += previous_frame_duration;
+
     // Here we get events from the host
     // NOTE: The implementer must convert host events into atelier's event format
     pump_host_events();
+
+    // Tick as fast as possible
+    tick(previous_frame_duration);
+
+    // We try to render the game at 60 FPS
+    const frame_duration target_framerate{1.0 / 60.0};
+    while(render_accumulated_duration_ >= target_framerate)
+    {
+        render();
+        render_accumulated_duration_ -= target_framerate;
+    }
+
+    last_frame_tp_ = current_frame_tp;
+}
+
+void application::tick(frame_duration dt)
+{
+    scene_.tick(dt);
+}
+
+void application::render()
+{
+    // TODO: Render current frame to the user
+    present_frame_to_player();
 }
 
 void application::terminate()
