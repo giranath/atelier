@@ -70,10 +70,8 @@ struct ATELIER_RUNTIME_EXPORT gpu_device
     /**
      * Bind an index buffer
      * @param buffer The buffer to bind
-     * @param size The size of the buffer to bind
-     * @param offset The offset of the buffer to bind
      */
-    virtual void bind_index_buffer(gpu_buffer& buffer, std::size_t size, std::size_t offset = 0) = 0;
+    virtual void bind_index_buffer(gpu_buffer& buffer) = 0;
 
     /**
      * Make an instance of a pipeline state

@@ -27,7 +27,7 @@ void opengl45_gpu_device::bind_vertex_buffer(gpu_buffer& buffer, std::size_t off
     }
 }
 
-void opengl45_gpu_device::bind_index_buffer(gpu_buffer& buffer, std::size_t size, std::size_t offset)
+void opengl45_gpu_device::bind_index_buffer(gpu_buffer& buffer)
 {
     opengl45_gpu_buffer& opengl_buffer = static_cast<opengl45_gpu_buffer&>(buffer);
 

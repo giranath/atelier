@@ -25,6 +25,7 @@ std::size_t opengl45_gpu_pipeline_state::vertex_stride() const
 void opengl45_gpu_pipeline_state::bind()
 {
     glBindVertexArray(vao_);
+    glUseProgram(program_);
 }
 
 void opengl45_gpu_pipeline_state::bind_vertex_buffer(GLuint buffer, GLintptr offset)

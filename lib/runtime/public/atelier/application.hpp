@@ -50,6 +50,8 @@ public:
 
     void request_termination();
 
+    gpu_device& gpu() noexcept;
+
 protected:
     /**
      * Called before the core application starts to initialize

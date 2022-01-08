@@ -18,7 +18,7 @@ class ATELIER_GPU_OPENGL45_EXPORT opengl45_gpu_device final : public gpu_device
 public:
     std::unique_ptr<gpu_buffer> make_buffer(const gpu_buffer_description& description) override final;
     void bind_vertex_buffer(gpu_buffer& buffer, std::size_t offset) override final;
-    void bind_index_buffer(gpu_buffer& buffer, std::size_t size, std::size_t offset) override final;
+    void bind_index_buffer(gpu_buffer& buffer) override final;
 
     std::unique_ptr<gpu_pipeline_state> make_pipeline_state(const gpu_pipeline_state_description& description) override final;
     void bind_pipeline_state(gpu_pipeline_state& state) override final;

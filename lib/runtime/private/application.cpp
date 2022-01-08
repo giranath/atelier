@@ -31,6 +31,13 @@ void application::request_termination()
     current_state_ = states::terminating;
 }
 
+gpu_device& application::gpu() noexcept
+{
+    assert(gpu_);
+
+    return *gpu_;
+}
+
 void application::on_initializing()
 {
     // NO-OP

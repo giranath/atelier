@@ -118,7 +118,7 @@ GLuint gl_compile_shader(GLenum shader_type, std::string_view source)
 
     const char* source_c_str = source.data();
 
-    glShaderSource(new_shader, source.size(), &source_c_str, nullptr);
+    glShaderSource(new_shader, 1, &source_c_str, nullptr);
     glCompileShader(new_shader);
 
     GLint compilation_status = 0;
