@@ -25,6 +25,9 @@ public:
 
     std::unique_ptr<gpu_texture> make_texture2d(const gpu_texture2d_description& description) override final;
     void bind_texture(gpu_texture& texture, int binding) override final;
+
+    void clear_render_target(float r, float g, float b) override final;
+    void draw(const gpu_draw_description& description) override final;
 };
 
 }

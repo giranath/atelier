@@ -2,6 +2,9 @@
 #include "opengl45_gpu_pipeline_state.hpp"
 #include "opengl45_gpu_buffer.hpp"
 #include "opengl45_gpu_texture.hpp"
+#include "opengl45_helpers.hpp"
+
+#include <cassert>
 
 namespace at
 {
@@ -56,6 +59,31 @@ void opengl45_gpu_device::bind_texture(gpu_texture& texture, int binding)
 
     glActiveTexture(GL_TEXTURE0 + binding);
     glBindTexture(GL_TEXTURE_2D, opengl_texture.handle());
+}
+
+void opengl45_gpu_device::clear_render_target(float r, float g, float b)
+{
+    glClearColor(r, g, b, 1.f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void opengl45_gpu_device::draw(const gpu_draw_description& description)
+{
+    if(description.is_indexed)
+    {
+        const GLsizei index_type_size = gl_index_type_size(description.index_type);
+
+        glDrawElements(gl_draw_topology(description.topology),
+                       description.count,
+                       gl_index_type(description.index_type),
+                       reinterpret_cast<GLvoid*>(index_type_size * description.offset));
+    }
+    else
+    {
+        glDrawArrays(gl_draw_topology(description.topology),
+                     description.offset,
+                     description.count);
+    }
 }
 
 }

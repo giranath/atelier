@@ -15,6 +15,38 @@ struct gpu_texture;
 struct gpu_texture2d_description;
 
 /**
+ * Enumerates supported draw topologies
+ */
+enum class gpu_draw_topology : uint8_t
+{
+    triangles
+};
+
+/**
+ * Enumerates supported index types
+ */
+enum class gpu_index_types : uint8_t
+{
+    uint8,
+    uint16,
+    uint32
+};
+
+/**
+ * Describe a draw command
+ */
+struct ATELIER_RUNTIME_EXPORT gpu_draw_description
+{
+    uint32_t count = 0;
+    uint32_t offset = 0;
+    bool is_indexed = false;
+    gpu_index_types index_type = gpu_index_types::uint8;
+    gpu_draw_topology topology = gpu_draw_topology::triangles;
+
+    gpu_draw_description() = default;
+};
+
+/**
  * Interface every GPU device must implement to be usable by Atelier
  */
 struct ATELIER_RUNTIME_EXPORT gpu_device
@@ -69,6 +101,19 @@ struct ATELIER_RUNTIME_EXPORT gpu_device
      * @param binding The binding point of the texture
      */
     virtual void bind_texture(gpu_texture& texture, int binding) = 0;
+
+    /**
+     * Clear current render target
+     * @param r Red component
+     * @param g Green component
+     * @param b Blue component
+     */
+    virtual void clear_render_target(float r, float g, float b) = 0;
+
+    /**
+     * Send draw command to the GPU
+     */
+    virtual void draw(const gpu_draw_description& description) = 0;
 };
 
 }

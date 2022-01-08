@@ -190,4 +190,47 @@ GLuint gl_link_program(const gpu_pipeline_state_description& state_description)
     return new_program;
 }
 
+GLenum gl_index_type(gpu_index_types type)
+{
+    switch(type)
+    {
+        case gpu_index_types::uint8:
+            return GL_UNSIGNED_BYTE;
+        case gpu_index_types::uint16:
+            return GL_UNSIGNED_SHORT;
+        case gpu_index_types::uint32:
+            return GL_UNSIGNED_INT;
+        default:
+            assert(false);
+            return GL_UNSIGNED_BYTE;
+    }
+}
+
+GLsizei gl_index_type_size(gpu_index_types index_type)
+{
+    switch(index_type)
+    {
+        case gpu_index_types::uint8:
+            return sizeof(uint8_t);
+        case gpu_index_types::uint16:
+            return sizeof(uint16_t);
+        case gpu_index_types::uint32:
+            return sizeof(uint32_t);
+        default:
+            return 0;
+    }
+}
+
+GLenum gl_draw_topology(gpu_draw_topology topology)
+{
+    switch(topology)
+    {
+        case gpu_draw_topology::triangles:
+            return GL_TRIANGLES;
+        default:
+            assert(false);
+            return 0;
+    }
+}
+
 }

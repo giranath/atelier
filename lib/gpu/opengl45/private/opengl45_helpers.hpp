@@ -4,6 +4,7 @@
 #include <atelier/gpu_vertex_layout.hpp>
 #include <atelier/gpu_texture.hpp>
 #include <atelier/gpu_pipeline_state.hpp>
+#include <atelier/gpu_device.hpp>
 #include <glad/glad.h>
 
 namespace at
@@ -59,6 +60,10 @@ GLuint gl_compile_shader(GLenum shader_type, std::string_view source);
  * @return the linked program
  */
 GLuint gl_link_program(const gpu_pipeline_state_description& state_description);
+
+GLenum gl_index_type(gpu_index_types type);
+GLsizei gl_index_type_size(gpu_index_types index_type);
+GLenum gl_draw_topology(gpu_draw_topology topology);
 
 }
 
