@@ -14,8 +14,8 @@ gpu_vertex_attribute::gpu_vertex_attribute() noexcept
 
 }
 
-gpu_vertex_attribute::gpu_vertex_attribute(std::string_view name, gpu_vertex_attribute_type type, bool normalized) noexcept
-: name{name}
+gpu_vertex_attribute::gpu_vertex_attribute(string_name name, gpu_vertex_attribute_type type, bool normalized) noexcept
+: name{std::move(name)}
 , type{type}
 , is_normalized{normalized}
 {
@@ -77,7 +77,7 @@ gpu_vertex_layout_builder gpu_vertex_layout_builder::make()
     return gpu_vertex_layout_builder{};
 }
 
-gpu_vertex_layout_builder& gpu_vertex_layout_builder::add_attribute(std::string_view name, gpu_vertex_attribute_type type, bool normalized)
+gpu_vertex_layout_builder& gpu_vertex_layout_builder::add_attribute(string_name name, gpu_vertex_attribute_type type, bool normalized)
 {
     if(attributes_.size() == gpu_vertex_layout::max_attribute_count - 1)
     {

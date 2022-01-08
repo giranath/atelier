@@ -2,6 +2,7 @@
 #define ATELIER_RUNTIME_GPU_VERTEX_LAYOUT_HPP
 
 #include "runtime_export.hpp"
+#include "string_name.hpp"
 #include <cstdint>
 #include <string>
 #include <vector>
@@ -30,7 +31,7 @@ enum class gpu_vertex_attribute_type : uint8_t
 struct ATELIER_RUNTIME_EXPORT gpu_vertex_attribute
 {
     /// The name of this attribute
-    std::string name;
+    string_name name;
 
     /// The type of the attribute
     gpu_vertex_attribute_type type;
@@ -39,7 +40,7 @@ struct ATELIER_RUNTIME_EXPORT gpu_vertex_attribute
     bool is_normalized;
 
     gpu_vertex_attribute() noexcept;
-    explicit gpu_vertex_attribute(std::string_view name, gpu_vertex_attribute_type type, bool normalized = false) noexcept;
+    explicit gpu_vertex_attribute(string_name name, gpu_vertex_attribute_type type, bool normalized = false) noexcept;
 
     [[nodiscard]] bool operator==(const gpu_vertex_attribute& other) const noexcept;
     [[nodiscard]] bool operator!=(const gpu_vertex_attribute& other) const noexcept;
@@ -109,7 +110,7 @@ public:
      * @param normalized A boolean to indicate if the attribute should be normalized or not
      * @return a reference to this builder to allow chain call
      */
-    gpu_vertex_layout_builder& add_attribute(std::string_view name, gpu_vertex_attribute_type type, bool normalized = false);
+    gpu_vertex_layout_builder& add_attribute(string_name name, gpu_vertex_attribute_type type, bool normalized = false);
 
     /**
      * Build an instance of a vertex layout from this builder
