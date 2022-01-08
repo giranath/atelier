@@ -25,6 +25,8 @@ add_library(runtime
         private/gpu_texture.cpp
         public/atelier/hash.hpp
         private/hash.cpp
+        public/atelier/string_name.hpp
+        private/string_name.cpp
         )
 
 set_target_properties(runtime PROPERTIES
