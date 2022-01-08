@@ -4,6 +4,9 @@ project(atelier
     VERSION 2022.1
     DESCRIPTION "A simple 2D game engine")
 
+set(ATELIER_RELEASE_PHASE "development" CACHE STRING "Determine the release phase of this build")
+set_property(CACHE ATELIER_RELEASE_PHASE PROPERTY STRINGS development stable candidate)
+
 find_package(SDL2 REQUIRED)
 find_package(glm REQUIRED)
 

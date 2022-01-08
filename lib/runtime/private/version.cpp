@@ -1,18 +1,33 @@
 #include "version.hpp"
 #include "current_version.hpp"
+#include <sstream>
 
 namespace at
 {
-    
-void linked_version(int& out_year, int& out_increment) noexcept
+
+
+std::ostream& operator<<(std::ostream& stream, const engine_version& version)
 {
-    out_year = current_version.year;
-    out_increment = current_version.revision;
+    stream << version.year() << '.' << version.release() << '.';
+
+    switch(version.phase())
+    {
+        case engine_version_phases::stable:
+            break;
+        case engine_version_phases::development:
+            stream << ".dev";
+            break;
+        case engine_version_phases::candidate:
+            stream << ".candidate";
+            break;
+    }
+
+    return stream;
 }
 
-const char* linked_version_c_str() noexcept
+engine_version linked_version() noexcept
 {
-    return current_version.c_str;
+    return current_version;
 }
 
 }
